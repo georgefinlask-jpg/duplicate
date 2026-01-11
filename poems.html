@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Poems</title>
+
   <style>
     body {
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background: #fff0f6;
       color: #d6336c;
       display: flex;
@@ -25,7 +26,7 @@
 
     h2 {
       font-size: 1.8rem;
-      margin: 20px 0 10px 0;
+      margin: 20px 0 10px;
       text-align: center;
       color: #ff6699;
     }
@@ -63,53 +64,90 @@
       font-weight: bold;
     }
 
-    /* ===== MODAL ===== */
-   #poemModal .modal-content {
-  background: #fff0f6;
-  border: 2px solid #ff99c8;
-  border-radius: 15px;
-  max-width: 700px;
-  width: 100%;
-  padding: 30px;
-  position: relative;
-  box-shadow: 2px 2px 15px rgba(214,51,108,0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* centers everything */
-}
+    /* ===== MODAL OVERLAY ===== */
+    #poemModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
 
-#poemModal .modal-content h3 {
-  margin-top: 0;
-  text-align: center;
-  font-size: 1.8rem;
-  font-family: 'Arial', sans-serif; /* same as title */
-  font-weight: bold;
-}
+      display: none;
+      justify-content: center;
+      align-items: center;
 
-#poemModal .modal-content pre {
-  white-space: pre-wrap; /* preserves line breaks */
-  line-height: 1.5;
-  max-height: 60vh;
-  overflow-y: auto;
-  margin-top: 20px;
-  text-align: center; /* center aligns poem content */
-  font-family: 'Arial', sans-serif; /* same font as title */
-  font-size: 1.1rem; /* slightly smaller than title */
-  font-weight: normal;
-}
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 9999;
+    }
 
-    #poemModal .close-btn {
+    /* ===== MODAL CONTENT ===== */
+    #poemModal .modal-content {
+      background: white;
+      border-radius: 20px;
+      border: 2px solid #ff99c8;
+      max-width: 700px;
+      width: 90%;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(214,51,108,0.4);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      animation: pop 0.25s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    #poemModal h3 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    #poemModal pre {
+      white-space: pre-wrap;
+      line-height: 1.6;
+      font-size: 1.1rem;
+      text-align: center;
+      max-height: 60vh;
+      overflow-y: auto;
+      margin-top: 20px;
+      color: #ff4d88;
+      font-family: Arial, sans-serif;
+    }
+
+    /* ===== CLOSE BUTTON ===== */
+    .close-btn {
       position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 1.5rem;
+      top: 12px;
+      right: 18px;
+      font-size: 1.8rem;
       cursor: pointer;
-      color: #d6336c;
+      color: #ff4d88;
       font-weight: bold;
+      background: none;
+      border: none;
+    }
+
+    .close-btn:hover {
+      color: #d6336c;
     }
   </style>
 </head>
+
 <body>
+
   <h1>Poems</h1>
 
   <h2>Tagalog Poems</h2>
@@ -118,126 +156,69 @@
   <h2>English Poems</h2>
   <div id="english-grid" class="poem-grid"></div>
 
-  <!-- Modal -->
+  <!-- ===== MODAL ===== -->
   <div id="poemModal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">×</span>
+      <button class="close-btn" onclick="closeModal()">×</button>
       <h3 id="modal-title"></h3>
       <pre id="modal-content"></pre>
     </div>
   </div>
 
   <script>
-    // ===== POEMS DATA =====
     const poems = [
-      // Tagalog Poems (first 3 as template)
-      { 
-        title: "Home in Your Smile", 
-        language: "Tagalog", 
-        content: `Every moment with you feels like home, 
+      {
+        title: "Home in Your Smile",
+        language: "Tagalog",
+        content: `Every moment with you feels like home,
 A place where my heart is never alone.
 Your laughter lingers, soft and clear,
 And every whisper draws me near.
 
-The stars may fall, the night may fade,
-But your warmth is a light that will never jade.
-The hand in mine, a perfect fit,
-A silent promise, a gentle knit.
-
-I watch your eyes, deep oceans of calm,
-Every glance from you feels like a balm.
-The world spins fast, yet here I stay,
-Anchored to you, come what may.
-
-Each word you speak, a melody sweet,
-Each heartbeat of yours makes mine complete.
-In storms or sunshine, in joy or fear,
-My home is your heart, always near.
-
-I’ll hold you close, through all life’s miles,
-Finding eternity in your soft smiles.
-Time cannot steal what we have grown,
-For every moment with you feels like home.
-
-With every hug, the world feels right,
-Your love is my shelter in darkest night.
-Even when silence surrounds the air,
-I feel your heartbeat always there.
-
-No treasure compares, no gold could shine,
-Like the quiet magic of calling you mine.
-Forever isn’t long enough to show,
-How much my heart loves you, you know.
-
-I find my peace in the way you stay,
-In simple moments, day by day.
-You turn the ordinary into something true,
-Just by being you, just by being you.
-
-When the world feels loud and pulls me away,
-Your presence brings me back to okay.
-You ground my thoughts, you calm my mind,
-A steady comfort I didn’t know I’d find.
-
-Every step feels lighter when you’re near,
-Every doubt fades, every fear.
-You don’t have to try or prove a thing,
-Your love is enough, it’s everything.
-
-In crowded rooms or quiet space,
-I search for you, your familiar face.
-Because wherever you happen to be,
-That’s where home feels like to me.
-
-I don’t need walls or perfect plans,
-Just your warmth and your steady hands.
-Wherever life decides to roam,
-If I’m with you, I’m already home.
-
-So if the world should change its tone,
-And paths feel unsure, unknown,
-I’ll follow the light I’ve always known, 
-Home has always been your smile alone.` 
+Wherever you are, that’s where I stay.
+If I’m with you, I’m already home.`
       },
-      { title: "Poem #2", language: "Tagalog", content: "Your Tagalog poem #2 content goes here..." },
-      { title: "Poem #3", language: "Tagalog", content: "Your Tagalog poem #3 content goes here..." },
+      { title: "Poem #2", language: "Tagalog", content: "Your Tagalog poem #2..." },
+      { title: "Poem #3", language: "Tagalog", content: "Your Tagalog poem #3..." },
 
-      // English Poems (first 3 as template)
-      { title: "Poem #1", language: "English", content: "Your English poem #1 content goes here..." },
-      { title: "Poem #2", language: "English", content: "Your English poem #2 content goes here..." },
-      { title: "Poem #3", language: "English", content: "Your English poem #3 content goes here..." },
+      { title: "Poem #1", language: "English", content: "Your English poem #1..." },
+      { title: "Poem #2", language: "English", content: "Your English poem #2..." },
+      { title: "Poem #3", language: "English", content: "Your English poem #3..." }
     ];
 
-    const tagalogGrid = document.getElementById('tagalog-grid');
-    const englishGrid = document.getElementById('english-grid');
-    const modal = document.getElementById('poemModal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalContent = document.getElementById('modal-content');
+    const tagalogGrid = document.getElementById("tagalog-grid");
+    const englishGrid = document.getElementById("english-grid");
+    const modal = document.getElementById("poemModal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalContent = document.getElementById("modal-content");
 
     function openModal(poem) {
-      modal.style.display = 'flex';
+      modal.style.display = "flex";
       modalTitle.textContent = poem.title;
       modalContent.textContent = poem.content;
+      document.body.style.overflow = "hidden";
     }
 
     function closeModal() {
-      modal.style.display = 'none';
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
     }
 
     poems.forEach(poem => {
-      const card = document.createElement('div');
-      card.classList.add('poem-card');
+      const card = document.createElement("div");
+      card.className = "poem-card";
       card.innerHTML = `<span>${poem.title}</span>`;
-      card.addEventListener('click', () => openModal(poem));
+      card.onclick = () => openModal(poem);
 
-      if(poem.language === "Tagalog") tagalogGrid.appendChild(card);
-      else if(poem.language === "English") englishGrid.appendChild(card);
+      poem.language === "Tagalog"
+        ? tagalogGrid.appendChild(card)
+        : englishGrid.appendChild(card);
     });
 
-    // Close modal if clicking outside content
-    window.addEventListener('click', e => {
-      if(e.target === modal) closeModal();
+    window.addEventListener("click", e => {
+      if (e.target === modal) closeModal();
     });
   </script>
+
 </body>
 </html>
