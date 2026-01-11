@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poems</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fff0f6;
+      color: #d6336c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-align: center;
+      text-shadow: 1px 1px 2px #ff99c8;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 20px 0 10px 0;
+      text-align: center;
+      color: #ff6699;
+    }
+
+    /* ===== POEM GRID ===== */
+    .poem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 30px;
+    }
+
+    .poem-card {
+      background: #fff0f6;
+      border: 2px solid #ff99c8;
+      border-radius: 15px;
+      padding: 20px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .poem-card:hover {
+      transform: scale(1.05);
+      box-shadow: 2px 2px 10px rgba(214,51,108,0.3);
+    }
+
+    .poem-card span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Poems</h1>
+
+  <h2>Tagalog Poems</h2>
+  <div id="tagalog-grid" class="poem-grid"></div>
+
+  <h2>English Poems</h2>
+  <div id="english-grid" class="poem-grid"></div>
+
+  <script>
+    // ===== POEMS DATA =====
+    const poems = [
+      // Tagalog Poems
+      { title: "Poem #1", language: "Tagalog", content: "Your Tagalog poem #1 content goes here..." },
+      { title: "Poem #2", language: "Tagalog", content: "Your Tagalog poem #2 content goes here..." },
+      { title: "Poem #3", language: "Tagalog", content: "Your Tagalog poem #3 content goes here..." },
+      // English Poems
+      { title: "adele", language: "English", content: "wow..." },
+      { title: "eden", language: "English", content: "mawi..." },
+      { title: "ching", language: "English", content: "boo..." },
+      // Add remaining poems here (4-15 Tagalog, 4-15 English)
+    ];
+
+    const tagalogGrid = document.getElementById('tagalog-grid');
+    const englishGrid = document.getElementById('english-grid');
+
+    poems.forEach(poem => {
+      const card = document.createElement('div');
+      card.classList.add('poem-card');
+      card.innerHTML = `<span>${poem.title}</span>`;
+      card.addEventListener('click', () => {
+        alert(`Title: ${poem.title}\nLanguage: ${poem.language}\n\nContent:\n${poem.content}`);
+      });
+
+      if(poem.language === "Tagalog") {
+        tagalogGrid.appendChild(card);
+      } else if(poem.language === "English") {
+        englishGrid.appendChild(card);
+      }
+    });
+  </script>
+</body>
+</html>
